@@ -1,0 +1,28 @@
+---
+const emojis = ["🥂", "🍾", "💃", "🪩", "🔥", "✨", "🎉", "💥"];
+---
+
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+  {emojis.map((emoji, i) => (
+    <span
+      class="emoji absolute text-2xl sm:text-3xl"
+      style={`left: ${10 + i * 12}%; animation-duration: ${8 + i * 2}s; animation-delay: ${i * 1.5}s;`}
+    >
+      {emoji}
+    </span>
+  ))}
+</div>
+
+<style>
+  .emoji {
+    animation: floatUp linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+    10%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(0deg);   opacity: 0; }
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+const units = [
+  { label: "DÍAS",  key: "days" },
+  { label: "HRS",   key: "hours" },
+  { label: "MIN",   key: "minutes" },
+  { label: "SEG",   key: "seconds" },
+];
+---
+
+<div class="flex gap-3 sm:gap-5 justify-center">
+  {units.map((u, i) => (
+    <div class="flex flex-col items-center anim-scale" style={`animation-delay: ${i * 0.1}s`}>
+      <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-muted/50 backdrop-blur-md border border-gold/20 flex items-center justify-center glow-gold">
+        <span class="text-2xl sm:text-3xl font-bold text-gradient-gold font-display" id={`unit-${u.key}`}>
+          00
+        </span>
+      </div>
+      <span class="text-[10px] sm:text-xs mt-2 tracking-[0.3em] text-muted-foreground font-body">
+        {u.label}
+      </span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .anim-scale {
+    opacity: 0;
+    animation: scaleIn 0.5s ease-out both;
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+<script>
+  const WEDDING_DATE = new Date("2027-11-15T20:00:00").getTime();
+
+  function calc() {
+    const diff = WEDDING_DATE - Date.now();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return {
+      days:    Math.floor(diff / 86400000),
+      hours:   Math.floor((diff % 86400000) / 3600000),
+      minutes: Math.floor((diff % 3600000) / 60000),
+      seconds: Math.floor((diff % 60000) / 1000),
+    };
+  }
+
+  function update() {
+    const t = calc();
+    for (const [key, value] of Object.entries(t)) {
+      const el = document.getElementById(`unit-${key}`);
+      if (el) el.textContent = String(value).padStart(2, "0");
+    }
+  }
+
+  update();
+  setInterval(update, 1000);
+</script>

@@ -1,0 +1,58 @@
+---
+---
+
+<section class="py-24 px-4 text-center">
+  <div class="max-w-lg mx-auto flex flex-col items-center gap-6">
+
+    <h2 class="text-4xl sm:text-5xl font-display text-gradient-gold anim-up drop-shadow-lg">
+      No faltes
+    </h2>
+
+    <p class="text-white/90 font-body text-sm sm:text-base anim-fade [text-shadow:0_1px_4px_rgba(0,0,0,0.8)]" style="animation-delay: 0.1s">
+      Esta no es una boda cualquiera. Es LA boda. La música no para, la barra no cierra, y la fiesta no termina hasta que salga el sol.
+    </p>
+
+    <p class="text-magenta font-body text-sm sm:text-base font-medium anim-fade" style="animation-delay: 0.2s">
+      Ponte lo más elegante que tengas y ven a pasarla increíble con nosotros.
+    </p>
+
+    <a
+      href="https://wa.me/?text=Confirmo+mi+asistencia+a+la+boda+de+Andrea+y+Daniel"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="px-10 py-4 rounded-full bg-gradient-party font-body font-bold tracking-widest text-white text-sm glow-magenta hover:scale-105 transition-transform duration-200 anim-scale"
+      style="animation-delay: 0.3s"
+    >
+      CONFIRMAR ASISTENCIA 🗝️
+    </a>
+
+    <p class="text-muted-foreground text-xs tracking-widest font-body">#AndreaYDaniel2025</p>
+  </div>
+
+  <p class="mt-20 text-muted-foreground text-xs font-body">Hecho con 🔥 y mucho amor</p>
+</section>
+
+<style>
+  .anim-up, .anim-fade, .anim-scale {
+    opacity: 0;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-out;
+    animation-play-state: paused;
+  }
+  .anim-up    { animation-name: fadeUp; }
+  .anim-fade  { animation-name: fadeIn; }
+  .anim-scale { animation-name: scaleIn; }
+  .visible { animation-play-state: running; }
+
+  @keyframes fadeUp  { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".anim-up, .anim-fade, .anim-scale").forEach(el => observer.observe(el));
+</script>

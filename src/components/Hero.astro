@@ -1,0 +1,71 @@
+---
+---
+
+<section
+  class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 hero-bg"
+>
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+  <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[hsl(270_15%_5%)]" />
+  <div class="relative z-10 flex flex-col items-center gap-6">
+
+    <p class="text-xs tracking-[0.4em] text-magenta font-body anim-fade-down">
+      ESTÁS INVITAD@ A LA FIESTA DEL AÑO
+    </p>
+
+    <div class="anim-scale" style="animation-delay: 0.2s">
+      <h1 class="text-7xl sm:text-9xl font-display font-bold text-gradient-gold leading-none">Andrea</h1>
+      <p class="text-3xl sm:text-4xl font-display italic text-foreground/70 my-2">&amp;</p>
+      <h1 class="text-7xl sm:text-9xl font-display font-bold text-gradient-gold leading-none">Daniel</h1>
+    </div>
+
+    <p class="max-w-sm text-foreground/70 font-body text-sm sm:text-base anim-fade" style="animation-delay: 0.4s">
+      Nos casamos y lo vamos a celebrar como se debe — sin límites, sin reglas, hasta que salga el sol 🌅
+    </p>
+
+    <div class="mt-2 px-8 py-3 rounded-full bg-gradient-party font-body font-semibold tracking-widest text-white text-sm anim-fade-up" style="animation-delay: 0.6s">
+      15 · NOV · 2025
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hero-bg {
+    background-image: url('');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  .anim-fade-down,
+  .anim-scale,
+  .anim-fade,
+  .anim-fade-up {
+    opacity: 0;
+    animation-fill-mode: both;
+    animation-duration: 0.6s;
+    animation-timing-function: ease-out;
+  }
+
+  .anim-fade-down { animation-name: fadeDown; }
+  .anim-scale     { animation-name: scaleIn; }
+  .anim-fade      { animation-name: fadeIn; }
+  .anim-fade-up   { animation-name: fadeUp; }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>

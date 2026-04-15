@@ -1,0 +1,45 @@
+---
+const rules = [
+  { svg: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22H5a2 2 0 0 1-2-2V6l3-3h13a1 1 0 0 1 1 1v3"/><path d="M11 22V12l-3 3"/><path d="m14 13 3 3v6"/><path d="M18 2v8"/><path d="m15 5 3-3 3 3"/></svg>`, text: "BARRA LIBRE TODA LA NOCHE",       color: "text-gold" },
+  { svg: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`, text: "DJ HASTA EL AMANECER",             color: "text-magenta" },
+  { svg: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" x2="19.07" y1="4.93" y2="19.07"/></svg>`, text: "NO NIÑOS · SOLO ADULTOS",          color: "text-neon-pink" },
+  { svg: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8l3-3"/><path d="M9 7l3 3"/><path d="M5.2 11a9 9 0 1 0 13.6 0"/></svg>`, text: "NO HAY HORA DE SALIDA",            color: "text-gold-light" },
+  { svg: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17"/><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"/><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"/></svg>`, text: "DRESSCODE: ELEGANTE & ATREVIDO",  color: "text-magenta-glow" },
+  { svg: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>`, text: "VEN A DARLO TODO",                color: "text-gold" },
+];
+---
+
+<div class="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+  {rules.map((rule, i) => (
+    <div
+      class="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted/30 backdrop-blur-sm border border-border/50 hover:border-gold/30 transition-all duration-300 anim-slide-in"
+      style={`animation-delay: ${i * 0.1}s`}
+      data-dir={i % 2 === 0 ? "left" : "right"}
+    >
+      <span class={`w-7 h-7 ${rule.color}`} set:html={rule.svg} />
+      <span class="text-[10px] sm:text-xs text-center tracking-wider font-body font-medium text-foreground/90">
+        {rule.text}
+      </span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .anim-slide-in {
+    opacity: 0;
+    animation: slideLeft 0.5s ease-out both;
+    animation-play-state: paused;
+  }
+  .anim-slide-in[data-dir="right"] { animation-name: slideRight; }
+  .anim-slide-in.visible { animation-play-state: running; }
+
+  @keyframes slideLeft  { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes slideRight { from { opacity: 0; transform: translateX(40px);  } to { opacity: 1; transform: translateX(0); } }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".anim-slide-in").forEach(el => observer.observe(el));
+</script>
