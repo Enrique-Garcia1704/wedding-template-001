@@ -1,8 +1,43 @@
 ---
+interface HeroData {
+  fecha: string;
+  lugar: string;
+}
+
+const { fecha, lugar } = Astro.props as HeroData;
+
+// Convertir fecha UTC a hora de México
+const dateObj = new Date(fecha);
+
+const fechaMX = dateObj.toLocaleDateString("es-MX", {
+  timeZone: "America/Mexico_City",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const horaMX = dateObj.toLocaleTimeString("es-MX", {
+  timeZone: "America/Mexico_City",
+  hour: "2-digit",
+  minute: "2-digit",
+});
+
+const units = [
+  { label: "DÍAS",  key: "days" },
+  { label: "HRS",   key: "hours" },
+  { label: "MIN",   key: "minutes" },
+  { label: "SEG",   key: "seconds" },
+];
+
+
+
+
+
+
 const details = [
-  { icon: "calendar", label: "FECHA",  value: "Sábado 15 de Noviembre, 2025" },
-  { icon: "clock",    label: "HORA",   value: "8:00 PM → Hasta que aguantes 🔥" },
-  { icon: "map-pin",  label: "LUGAR",  value: "Hacienda Los Reyes, Guadalajara" },
+  { icon: "calendar", label: "FECHA", value: fechaMX },
+  { icon: "clock", label: "HORA", value: horaMX },
+  { icon: "map-pin", label: "LUGAR", value: lugar },
 ];
 
 const svgs: Record<string, string> = {

@@ -8,15 +8,26 @@ import CallToAction from '../components/CallToAction.astro';
 import FloatingEmojis from '../components/FloatingEmojis.astro';
 import PartyRules from '../components/PartyRules.astro';
 
+
+import { fetchIndexData } from '../lib/services/index.ts';
+
+export const prerender = false;
+
+const id = Astro.url.searchParams.get("id");
+const indexData = id ? await fetchIndexData(id) : null;
+
+
+indexData?.detalle_evento?.[0]?.nombre_pareja1
+indexData?.fecha_evento
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Hero />
+	<Hero frase_principal={indexData?.detalle_evento?.[0]?.frase_principal} nombreNovia={indexData?.detalle_evento?.[0]?.nombre_pareja1} nombreNovio={indexData?.detalle_evento?.[0]?.nombre_pareja2} fecha={indexData?.fecha_evento} />
 	<FloatingEmojis />
-	<Countdown />
-	<EventDetails />
+	<Countdown fecha={indexData?.fecha_evento} />
+	<EventDetails fecha={indexData?.fecha_evento} lugar={indexData?.detalle_evento?.[0]?.lugar} />
 	<PartyRules />
 	<CallToAction />
 </Layout>
